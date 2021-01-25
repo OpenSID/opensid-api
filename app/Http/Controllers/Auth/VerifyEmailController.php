@@ -21,21 +21,21 @@ class VerifyEmailController extends Controller
     public function __invoke(Request $request, string $id, string $hash)
     {
         if (! hash_equals($id, (string) $request->user()->getKey())) {
-            return false;
+            return $this->fail('failed to verified your email', 401);
         }
 
         if (! hash_equals($hash, sha1($request->user()->getEmailForVerification()))) {
-            return false;
+            return $this->fail('failed to verified your email', 401);
         }
 
         if ($request->user()->hasVerifiedEmail()) {
-            return $this->response('verified', 200);
+            return $this->response('your email has been verified', 200);
         }
 
         if ($request->user()->markEmailAsVerified()) {
             event(new Verified($request->user()));
         }
 
-        return $this->response('verified', 200);
+        return $this->response('your email has been verified', 200);
     }
 }

@@ -75,7 +75,9 @@ $app->configure('services');
 $app->configure('view');
 
 $app->configure('cors');
+$app->configure('fractal');
 $app->configure('json-api-paginate');
+$app->configure('query-builder');
 
 
 /*
