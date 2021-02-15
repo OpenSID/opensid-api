@@ -50,7 +50,7 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
     // Layanan mandiri
     $router->group(['prefix' => 'layanan-mandiri', 'middleware' => ['jwt.auth', 'verified']], function () use ($router) {
         // Mandiri pesan masuk
-        $router->group(['prefix' => 'pesan'], function () use($router) {
+        $router->group(['prefix' => 'pesan'], function () use ($router) {
             $router->get('tipe/{tipe}', 'PesanController@index');
             $router->get('detail/{id}', 'PesanController@show');
             $router->post('/', 'PesanController@store');

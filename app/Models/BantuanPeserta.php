@@ -35,6 +35,6 @@ class BantuanPeserta extends Model
      */
     public function scopePeserta($query)
     {
-        return $query->where('peserta', Auth::user()->nik);
+        return $query->where('peserta', Auth::user()->penduduk->nik);
     }
 }

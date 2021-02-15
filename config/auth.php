@@ -14,8 +14,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => env('AUTH_GUARD', 'api'),
-        'passwords' => 'penduduk',
+        'guard' => 'api',
+        'passwords' => 'mandiri',
     ],
 
     /*
@@ -38,12 +38,12 @@ return [
     'guards' => [
         'api' => [
             'driver' => 'jwt',
-            'provider' => 'penduduk',
+            'provider' => 'mandiri',
         ],
-        'user' => [
-            'driver' => 'jwt',
-            'provider' => 'users',
-        ]
+        // 'user' => [
+        //     'driver' => 'jwt',
+        //     'provider' => 'users',
+        // ]
     ],
 
     /*
@@ -64,14 +64,14 @@ return [
     */
 
     'providers' => [
-        'penduduk' => [
+        'mandiri' => [
             'driver' => 'eloquent',
-            'model' => App\Models\penduduk::class,
+            'model' => App\Models\PendudukMandiri::class,
         ],
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\User::class,
-        ]
+        // 'users' => [
+        //     'driver' => 'eloquent',
+        //     'model' => App\Models\User::class,
+        // ]
     ],
 
     /*
@@ -94,18 +94,18 @@ return [
     */
 
     'passwords' => [
-        'penduduk' => [
-            'provider' => 'penduduk',
+        'mandiri' => [
+            'provider' => 'mandiri',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
         ],
-        'users' => [
-            'provider' => 'user',
-            'table' => 'password_resets',
-            'expire' => 60,
-            'throttle' => 60,
-        ]
+        // 'users' => [
+        //     'provider' => 'user',
+        //     'table' => 'password_resets',
+        //     'expire' => 60,
+        //     'throttle' => 60,
+        // ]
     ],
 
     /*

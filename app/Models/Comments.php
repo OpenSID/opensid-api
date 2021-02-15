@@ -86,6 +86,6 @@ class Comments extends Model
      */
     public function scopePesanPengguna($query)
     {
-        return $query->where('email', Auth::user()->nik);
+        return $query->where('email', Auth::user()->penduduk->nik);
     }
 }

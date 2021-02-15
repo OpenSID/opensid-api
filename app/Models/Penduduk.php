@@ -2,27 +2,11 @@
 
 namespace App\Models;
 
-use App\Http\Traits\CanResetPassword;
-use App\Http\Traits\MustVerifyEmail;
-use Illuminate\Auth\Authenticatable;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
-use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Penduduk extends Model implements
-    AuthenticatableContract,
-    CanResetPasswordContract,
-    MustVerifyEmailContract,
-    JWTSubject
+class Penduduk extends Model
 {
-    use Authenticatable;
-    use CanResetPassword;
-    use MustVerifyEmail;
-    use Notifiable;
-
     /**
      * The table associated with the model.
      *
@@ -60,18 +44,12 @@ class Penduduk extends Model implements
     ];
 
     /**
-     * {@inheritdoc}
+     * Define a one-to-one relationship.
+     *
+     * @return HasOne
      */
-    public function getJWTIdentifier()
+    public function mandiri()
     {
-        return $this->getKey();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getJWTCustomClaims()
-    {
-        return [];
+        return $this->hasOne(PendudukMandiri::class, 'id_pend');
     }
 }

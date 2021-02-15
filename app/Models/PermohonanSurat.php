@@ -59,7 +59,7 @@ class PermohonanSurat extends Model
      */
     public function scopePengguna($query)
     {
-        return $query->where('id_pemohon', Auth::user()->id);
+        return $query->where('id_pemohon', Auth::user()->penduduk->id);
     }
 
     public function penduduk()

@@ -13,10 +13,13 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('tweb_penduduk', function (Blueprint $table) {
+        Schema::table('tweb_penduduk_mandiri', function (Blueprint $table) {
+            $table->decimal('nik', 16, 0)->nullable();
+            $table->string('email')->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->rememberToken();
+            $table->dateTime('updated_at')->nullable();
         });
     }
 
@@ -27,8 +30,14 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('tweb_penduduk', function (Blueprint $table) {
-            $table->dropColumn(['email_verified_at', 'password', 'remember_token']);
+        Schema::table('tweb_penduduk_mandiri', function (Blueprint $table) {
+            $table->dropColumn([
+                'nik',
+                'email',
+                'email_verified_at',
+                'password',
+                'remember_token',
+                'updated_at']);
         });
     }
 }

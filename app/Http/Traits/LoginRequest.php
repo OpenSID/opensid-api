@@ -27,7 +27,18 @@ trait LoginRequest
      */
     public function login(Request $request)
     {
-        $this->ensureIsNotRateLimited();
+        if (RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
+            event(new Lockout($request));
+
+            $seconds = RateLimiter::availableIn($this->throttleKey());
+
+            return $this->fail([
+                'email' => trans('auth.throttle', [
+                    'seconds' => $seconds,
+                    'minutes' => ceil($seconds / 60),
+                ]),
+            ], 403);
+        }
 
         $this->validate($request, [
             'email'    => 'required|string|email',
@@ -84,30 +95,6 @@ trait LoginRequest
      */
     protected function authenticated(string $token)
     {
-    }
-
-    /**
-     * Ensure the login request is not rate limited.
-     *
-     * @return void
-     * @throws ValidationException
-     */
-    public function ensureIsNotRateLimited()
-    {
-        if (! RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
-            return;
-        }
-
-        event(new Lockout($this));
-
-        $seconds = RateLimiter::availableIn($this->throttleKey());
-
-        return $this->fail([
-            'email' => trans('auth.throttle', [
-                'seconds' => $seconds,
-                'minutes' => ceil($seconds / 60),
-            ]),
-        ], 403);
     }
 
     /**

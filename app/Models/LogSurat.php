@@ -45,6 +45,6 @@ class LogSurat extends Model
      */
     public function scopePengguna($query)
     {
-        return $query->where('id_pend', Auth::user()->id);
+        return $query->where('id_pend', Auth::user()->penduduk->id);
     }
 }

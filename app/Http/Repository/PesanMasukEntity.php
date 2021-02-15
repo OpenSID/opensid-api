@@ -91,7 +91,7 @@ class PesanMasukEntity
 
     public function insert(Request $request)
     {
-        $user    = Auth::user();
+        $user    = Auth::user()->penduduk;
         $comment = new Comments();
 
         $comment->fill([
