@@ -92,6 +92,15 @@ class PendudukMandiri extends Model implements
     ];
 
     /**
+     * The relations to eager load on every query.
+     *
+     * @var array
+     */
+    protected $with = [
+        'penduduk',
+    ];
+
+    /**
      * {@inheritdoc}
      */
     public function getJWTIdentifier()

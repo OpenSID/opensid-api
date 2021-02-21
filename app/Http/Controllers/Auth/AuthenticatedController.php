@@ -3,26 +3,24 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Traits\LoginRequest as TraitLoginRequest;
+use App\Http\Traits\LoginRequestTrait;
+use App\Http\Transformers\PendudukTransformer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use function response;
-
 class AuthenticatedController extends Controller
 {
-    use TraitLoginRequest;
+    use LoginRequestTrait;
 
     /**
      * {@inheritdoc}
      */
     protected function authenticated(string $token)
     {
-        return response()->json([
-            'access_token' => $token,
-            'token_type'   => 'Bearer',
-            'expires_in'   => Auth::factory()->getTTL() * 60,
-        ]);
+        $user        = Auth::user();
+        $user->token = $token;
+
+        return $this->fractal($user, new PendudukTransformer(), 'penduduk');
     }
 
     /**
@@ -30,6 +28,6 @@ class AuthenticatedController extends Controller
      */
     protected function loggedOut(Request $request)
     {
-        return response('Successfully logged out', 200);
+        return $this->response('Successfully logged out', 200);
     }
 }

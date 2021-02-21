@@ -7,6 +7,9 @@ use League\Fractal\TransformerAbstract;
 
 class BantuanPesertaTransformer extends TransformerAbstract
 {
+    /**
+     * {@inheritdoc}
+     */
     public function transform(BantuanPeserta $peserta)
     {
         return [

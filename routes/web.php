@@ -18,6 +18,11 @@ $router->get('/', function () use ($router) {
 });
 
 $router->group(['prefix' => 'api/v1'], function () use ($router) {
+    // Profil Desa
+    $router->group(['prefix' => 'profil-desa', 'middleware' => 'jwt.auth'], function() use ($router) {
+        $router->get('/', 'ConfigDesaController@index');
+    });
+
     // Autentikasi
     $router->group(['prefix' => 'auth', 'namespace' => 'Auth'], function () use ($router) {
         $router->post('login', 'AuthenticatedController@login');

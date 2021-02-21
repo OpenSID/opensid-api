@@ -13,11 +13,14 @@ use Illuminate\Validation\ValidationException;
 use function __;
 use function ceil;
 use function event;
+use function filter_var;
 use function redirect;
 use function request;
 use function trans;
 
-trait LoginRequest
+use const FILTER_VALIDATE_EMAIL;
+
+trait LoginRequestTrait
 {
     /**
      * Attempt to authenticate the request's credentials.
@@ -33,7 +36,7 @@ trait LoginRequest
             $seconds = RateLimiter::availableIn($this->throttleKey());
 
             return $this->fail([
-                'email' => trans('auth.throttle', [
+                'credential' => trans('auth.throttle', [
                     'seconds' => $seconds,
                     'minutes' => ceil($seconds / 60),
                 ]),
@@ -41,14 +44,19 @@ trait LoginRequest
         }
 
         $this->validate($request, [
-            'email'    => 'required|string|email',
-            'password' => 'required|string',
+            'credential' => 'required',
+            'password'   => 'required|string',
         ]);
 
-        if (! $token = Auth::attempt($request->only('email', 'password'))) {
+        $credentials = [
+            filter_var($request->credential, FILTER_VALIDATE_EMAIL) ? 'email' : 'nik' => $request->credential,
+            'password' => $request->password,
+        ];
+
+        if (! $token = Auth::attempt($credentials)) {
             RateLimiter::hit($this->throttleKey());
 
-            return $this->fail(['email' => __('auth.failed')], 401);
+            return $this->fail(['credential' => __('auth.failed')], 401);
         }
 
         return $this->sendLoginResponse($token);
@@ -104,6 +112,6 @@ trait LoginRequest
      */
     public function throttleKey()
     {
-        return Str::lower(request('email')) . '|' . request()->ip();
+        return Str::lower(request('credential')) . '|' . request()->ip();
     }
 }

@@ -47,6 +47,6 @@ trait MustVerifyEmail
      */
     public function getEmailForVerification()
     {
-        return $this->email;
+        return $this->penduduk->email;
     }
 }

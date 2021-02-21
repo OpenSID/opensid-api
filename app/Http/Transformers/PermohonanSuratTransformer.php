@@ -7,6 +7,9 @@ use League\Fractal\TransformerAbstract;
 
 class PermohonanSuratTransformer extends TransformerAbstract
 {
+    /**
+     * {@inheritdoc}
+     */
     public function transform(PermohonanSurat $surat)
     {
         return [

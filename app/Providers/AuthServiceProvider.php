@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\User;
+use App\Supports\CustomUserProvider;
 use Illuminate\Support\ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -32,6 +33,11 @@ class AuthServiceProvider extends ServiceProvider
             if ($request->input('api_token')) {
                 return User::where('api_token', $request->input('api_token'))->first();
             }
+        });
+
+        // Adding custom provider
+        $this->app['auth']->provider('custom', function ($app, array $config) {
+            return new CustomUserProvider($app['hash'], $config['model'], $config['belongsTo']);
         });
     }
 }

@@ -7,6 +7,9 @@ use League\Fractal\TransformerAbstract;
 
 class ArsipSuratTransformer extends TransformerAbstract
 {
+    /**
+     * {@inheritdoc}
+     */
     public function transform(LogSurat $surat)
     {
         return [
