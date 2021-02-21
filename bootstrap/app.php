@@ -116,20 +116,10 @@ $app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
 $app->register(App\Providers\EventServiceProvider::class);
 $app->register(App\Providers\JsonApiPaginateServiceProvider::class);
-$app->register(Illuminate\Auth\Passwords\PasswordResetServiceProvider::class);
-$app->register(Illuminate\Mail\MailServiceProvider::class);
-$app->register(Illuminate\Auth\Passwords\PasswordResetServiceProvider::class);
-$app->register(Illuminate\Notifications\NotificationServiceProvider::class);
 
 $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 $app->register(Fruitcake\Cors\CorsServiceProvider::class);
 $app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
-
-$app->alias('mailer', Illuminate\Mail\Mailer::class);
-$app->alias('mailer', Illuminate\Contracts\Mail\Mailer::class);
-$app->alias('mailer', Illuminate\Contracts\Mail\MailQueue::class);
-$app->alias('mail.manager', Illuminate\Mail\MailManager::class);
-$app->alias('mail.manager', Illuminate\Contracts\Mail\Factory::class);
 
 /*
 |--------------------------------------------------------------------------

@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
+use App\Http\Traits\CanResetPassword;
+use App\Http\Traits\MustVerifyEmail;
 use Illuminate\Auth\Authenticatable;
-use Illuminate\Auth\MustVerifyEmail;
-use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Model implements
@@ -20,8 +20,8 @@ class User extends Model implements
 {
     use Authenticatable;
     use CanResetPassword;
-    use HasFactory;
     use MustVerifyEmail;
+    use Notifiable;
 
     /**
      * The table associated with the model.

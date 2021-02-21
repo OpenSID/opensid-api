@@ -65,10 +65,11 @@ class PendudukMandiri extends Model implements
      * @var array
      */
     protected $fillable = [
+        'last_login',
         'ganti_pin',
-        'nik',
-        'email',
+        'email_verified_at',
         'password',
+        'remember_token',
     ];
 
     /**

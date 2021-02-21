@@ -2,7 +2,7 @@
 
 namespace App\Http\Traits;
 
-use App\Notifications\ResetPassword as ResetPasswordNotification;
+use App\Notifications\ResetPassword;
 
 trait CanResetPassword
 {
@@ -24,6 +24,6 @@ trait CanResetPassword
      */
     public function sendPasswordResetNotification($token)
     {
-        $this->notify(new ResetPasswordNotification($token));
+        $this->notify(new ResetPassword($token));
     }
 }

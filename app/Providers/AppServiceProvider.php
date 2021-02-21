@@ -18,6 +18,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->register(\Illuminate\Mail\MailServiceProvider::class);
+        $this->app->register(\Illuminate\Notifications\NotificationServiceProvider::class);
+        $this->app->register(\Illuminate\Auth\Passwords\PasswordResetServiceProvider::class);
+
+        $this->app->alias('mailer', \Illuminate\Mail\Mailer::class);
+        $this->app->alias('mailer', \Illuminate\Contracts\Mail\Mailer::class);
+        $this->app->alias('mailer', \Illuminate\Contracts\Mail\MailQueue::class);
+        $this->app->alias('mail.manager', \Illuminate\Mail\MailManager::class);
+        $this->app->alias('mail.manager', \Illuminate\Contracts\Mail\Factory::class);
+
         $this->app->bind('url', function () {
             return new UrlGenerator(app());
         });
