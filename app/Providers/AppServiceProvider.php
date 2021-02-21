@@ -3,7 +3,15 @@
 namespace App\Providers;
 
 use App\Supports\UrlGenerator;
+use Illuminate\Auth\Passwords\PasswordResetServiceProvider;
+use Illuminate\Contracts\Mail\Factory;
+use Illuminate\Contracts\Mail\Mailer as MailerContract;
+use Illuminate\Contracts\Mail\MailQueue;
 use Illuminate\Http\Request;
+use Illuminate\Mail\Mailer;
+use Illuminate\Mail\MailManager;
+use Illuminate\Mail\MailServiceProvider;
+use Illuminate\Notifications\NotificationServiceProvider;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
@@ -18,15 +26,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->register(\Illuminate\Mail\MailServiceProvider::class);
-        $this->app->register(\Illuminate\Notifications\NotificationServiceProvider::class);
-        $this->app->register(\Illuminate\Auth\Passwords\PasswordResetServiceProvider::class);
+        $this->app->register(MailServiceProvider::class);
+        $this->app->register(NotificationServiceProvider::class);
+        $this->app->register(PasswordResetServiceProvider::class);
 
-        $this->app->alias('mailer', \Illuminate\Mail\Mailer::class);
-        $this->app->alias('mailer', \Illuminate\Contracts\Mail\Mailer::class);
-        $this->app->alias('mailer', \Illuminate\Contracts\Mail\MailQueue::class);
-        $this->app->alias('mail.manager', \Illuminate\Mail\MailManager::class);
-        $this->app->alias('mail.manager', \Illuminate\Contracts\Mail\Factory::class);
+        $this->app->alias('mailer', Mailer::class);
+        $this->app->alias('mailer', MailerContract::class);
+        $this->app->alias('mailer', MailQueue::class);
+        $this->app->alias('mail.manager', MailManager::class);
+        $this->app->alias('mail.manager', Factory::class);
 
         $this->app->bind('url', function () {
             return new UrlGenerator(app());

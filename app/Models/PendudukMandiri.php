@@ -126,4 +126,14 @@ class PendudukMandiri extends Model implements
     {
         return $this->belongsTo(Penduduk::class, 'id_pend');
     }
+
+    /**
+     * Get email penduduk attribute.
+     *
+     * @return string
+     */
+    public function getEmailAttribute()
+    {
+        return $this->penduduk->email;
+    }
 }

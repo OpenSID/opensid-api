@@ -45,7 +45,7 @@ trait LoginRequestTrait
 
         $this->validate($request, [
             'credential' => 'required',
-            'password'   => 'required|string',
+            'password'   => 'required',
         ]);
 
         $credentials = [

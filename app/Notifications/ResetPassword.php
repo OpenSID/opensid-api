@@ -7,6 +7,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\HtmlString;
 
 use function call_user_func;
 use function config;
@@ -83,8 +84,8 @@ class ResetPassword extends Notification
         return (new MailMessage())
             ->subject(Lang::get('Reset Password Notification'))
             ->line(Lang::get('You are receiving this email because we received a password reset request for your account.'))
-            ->line(Lang::get('This token reset will expire in :count minutes.', ['count' => config('auth.passwords.' . config('auth.defaults.passwords') . '.expire')]))
-            ->line($this->token)
+            ->line(Lang::get('Copy this below token, the token reset will be expire in :count minutes.', ['count' => config('auth.passwords.' . config('auth.defaults.passwords') . '.expire')]))
+            ->line(new HtmlString("<strong>{$this->token}</strong>"))
             ->line(Lang::get('If you did not request a password reset, no further action is required.'));
     }
 
