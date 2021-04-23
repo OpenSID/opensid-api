@@ -25,7 +25,7 @@ class PendudukTransformer extends TransformerAbstract
             ] : [],
             [
                 'id' => $mandiri->id_pend,
-                'foto' => $mandiri->penduduk->foto,
+                'foto' => url_foto($mandiri->penduduk->foto, '', $mandiri->penduduk->jenisKelamin->id),
                 'nama' => $mandiri->penduduk->nama,
                 'nik' => $mandiri->penduduk->nik,
                 'tempat_lahir' => $mandiri->penduduk->tempatlahir,

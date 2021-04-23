@@ -79,6 +79,8 @@ $app->configure('fractal');
 $app->configure('json-api-paginate');
 $app->configure('query-builder');
 
+$app->configure('opensid');
+
 
 /*
 |--------------------------------------------------------------------------
