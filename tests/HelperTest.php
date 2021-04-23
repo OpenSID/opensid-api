@@ -1,6 +1,6 @@
 <?php
 
-Class HelperTest extends TestCase
+class HelperTest extends TestCase
 {
     public function testUrlFotoContainWomen()
     {
