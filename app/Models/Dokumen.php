@@ -54,7 +54,7 @@ class Dokumen extends Model
 
     /**
      * Getter untuk menambahkan url file.
-     * 
+     *
      * @return string
      */
     public function getUrlFileAttribute()

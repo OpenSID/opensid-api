@@ -32,7 +32,7 @@ class FormatSurat extends Model
 
     /**
      * Scope query untuk list surat yang tidak dikunci.
-     * 
+     *
      * @param Builder $query
      * @return Builder
      */

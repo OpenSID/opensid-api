@@ -14,7 +14,7 @@ class DokumenEntity
 {
     /**
      * Upload dokumen penduduk.
-     * 
+     *
      * @param Request $request
      * @return mixed
      * @throws Exception

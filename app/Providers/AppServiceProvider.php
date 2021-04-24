@@ -16,9 +16,9 @@ use Illuminate\Mail\MailServiceProvider;
 use Illuminate\Notifications\NotificationServiceProvider;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\URL;
-use Illuminate\Support\Str;
-
 use Illuminate\Support\ServiceProvider;
+
+use Illuminate\Support\Str;
 
 class AppServiceProvider extends ServiceProvider
 {

@@ -136,7 +136,7 @@ class PendudukMandiri extends Model implements
 
     /**
      * Getter untuk menambahkan url foto.
-     * 
+     *
      * @return string
      */
     public function getUrlFotoAttribute()

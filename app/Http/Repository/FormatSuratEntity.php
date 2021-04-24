@@ -37,7 +37,7 @@ class FormatSuratEntity
 
     /**
      * Get jenis surat permohonan.
-     * 
+     *
      * @return Spatie\QueryBuilder\QueryBuilder
      */
     public function jenis()

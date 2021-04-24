@@ -15,7 +15,7 @@ class ConfigDesa extends Model
 
     /**
      * Getter untuk menambahkan url logo.
-     * 
+     *
      * @return string
      */
     public function getUrlLogoAttribute()
