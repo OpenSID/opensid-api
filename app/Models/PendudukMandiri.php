@@ -115,6 +115,16 @@ class PendudukMandiri extends Model implements
     }
 
     /**
+     * Define an inverse one-to-one or many relationship.
+     *
+     * @return BelongsTo
+     */
+    public function dokumen()
+    {
+        return $this->belongsTo(Dokumen::class, 'id_pend');
+    }
+
+    /**
      * Get email penduduk attribute.
      *
      * @return string
@@ -122,5 +132,15 @@ class PendudukMandiri extends Model implements
     public function getEmailAttribute()
     {
         return $this->penduduk->email;
+    }
+
+    /**
+     * Getter untuk menambahkan url foto.
+     * 
+     * @return string
+     */
+    public function getUrlFotoAttribute()
+    {
+        return url_foto($this->penduduk->foto, '', $this->penduduk->jenisKelamin->id);
     }
 }

@@ -14,7 +14,7 @@ class ConfigDesaTransformer extends TransformerAbstract
     {
         return [
             'id' => $config->id,
-            'logo' => config('opensid.host') . LOKASI_LOGO_DESA . $config->logo,
+            'logo' => $config->urlLogo,
             'email_desa' => $config->email_desa,
             'telepon' => $config->telepon,
             'website' => $config->website,

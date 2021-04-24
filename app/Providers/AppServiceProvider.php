@@ -8,12 +8,15 @@ use Illuminate\Auth\Passwords\PasswordResetServiceProvider;
 use Illuminate\Contracts\Mail\Factory;
 use Illuminate\Contracts\Mail\Mailer as MailerContract;
 use Illuminate\Contracts\Mail\MailQueue;
+use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Http\Request;
 use Illuminate\Mail\Mailer;
 use Illuminate\Mail\MailManager;
 use Illuminate\Mail\MailServiceProvider;
 use Illuminate\Notifications\NotificationServiceProvider;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Str;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -36,6 +39,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->alias('mail.manager', MailManager::class);
         $this->app->alias('mail.manager', Factory::class);
 
+        $this->logQuery();
+
         $this->app['hash']->extend('md5', function () {
             return new Md5Hashing();
         });
@@ -51,5 +56,22 @@ class AppServiceProvider extends ServiceProvider
         Request::macro('hasValidRelativeSignature', function () {
             return URL::hasValidSignature($this, $absolute = false);
         });
+    }
+
+    protected function logQuery()
+    {
+        if ($this->app->environment('local')) {
+            Event::listen(QueryExecuted::class, function ($query) {
+                $bindings = collect($query->bindings)->map(function ($param) {
+                    if (is_numeric($param)) {
+                        return $param;
+                    } else {
+                        return "'$param'";
+                    }
+                });
+
+                $this->app->log->debug(Str::replaceArray('?', $bindings->toArray(), $query->sql));
+            });
+        }
     }
 }

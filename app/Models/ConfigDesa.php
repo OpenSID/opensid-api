@@ -12,4 +12,14 @@ class ConfigDesa extends Model
      * @var string
      */
     protected $table = 'config';
+
+    /**
+     * Getter untuk menambahkan url logo.
+     * 
+     * @return string
+     */
+    public function getUrlLogoAttribute()
+    {
+        return config('opensid.host') . LOKASI_LOGO_DESA . $this->logo;
+    }
 }

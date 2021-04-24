@@ -69,6 +69,9 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
         $router->group(['prefix' => 'surat'], function () use ($router) {
             $router->get('arsip', 'SuratController@arsip');
             $router->get('permohonan', 'SuratController@permohonan');
+            $router->get('jenis-permohonan', 'SuratController@jenis');
+            $router->get('syarat', 'SuratController@syaratSurat');
+            $router->post('unggah-dokumen', 'SuratController@unggahDokumen');
         });
     });
 });
