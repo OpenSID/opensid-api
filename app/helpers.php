@@ -9,7 +9,7 @@ define("LOKASI_USER_PICT", 'desa/upload/user_pict/');
 if (! function_exists('url_foto')) {
     /**
      * Helper untuk mengambil url foto.
-     * 
+     *
      * @param string $foto
      * @param string $ukuran
      * @param int $sex
